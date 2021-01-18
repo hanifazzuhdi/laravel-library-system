@@ -22,4 +22,4 @@ Auth::routes([
 ]);
 
 // Route
-Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
+Route::get('dashboard', 'HomeController@index')->middleware('verified')->name('home');
