@@ -2,74 +2,53 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Author;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected function validated(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name'  => 'required'
+        ]);
+
+        return $data;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $this->validated($request);
+
+        Author::create($data);
+
+        return back()
+            ->with('success', 'data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Author $author)
     {
-        //
+        json_decode($author);
+
+        return $author;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, Author $author)
     {
-        //
+        $data = $this->validated($request);
+
+        $author->update($data);
+
+        return back()
+            ->with('success', 'data berhasil diubah');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Author $author)
     {
-        //
-    }
+        $author->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return back()
+            ->with('success', 'data berhasil dihapus');
     }
 }

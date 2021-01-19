@@ -5,20 +5,20 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book-open"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Perpustakaan</div>
+        <div class="sidebar-brand-text mx-3">PerpusKu</div>
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item{{ request()->path() == 'admin/dashboard' ? ' active' : ''}}">
+        <a class="nav-link" href="{{route('admin.dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item{{request()->path() == 'admin/users' ? ' active' : ''}}">
+        <a class="nav-link" href="{{route('admin.users')}}">
             <i class="fas fa-fw fa-user"></i>
             <span>Daftar User</span></a>
     </li>
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item{{request()->path() == 'admin/authors' ? ' active' : '' }}">
         <a class="nav-link collapsed" href="{{route('admin.authors')}}">
             <i class="fas fa-fw fa-pencil-alt"></i>
             <span>Authors</span>
@@ -39,8 +39,8 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+    <li class="nav-item{{request()->path() == 'admin/books' ? ' active' : ''}}">
+        <a class="nav-link collapsed" href="{{route('admin.books')}}">
             <i class="fas fa-fw fa-book"></i>
             <span>Books</span>
         </a>
@@ -54,43 +54,8 @@
         Data Peminjaman
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-            aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li>
-
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

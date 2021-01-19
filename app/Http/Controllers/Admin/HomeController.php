@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Author;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -15,8 +14,8 @@ class HomeController extends Controller
 
     public function author()
     {
-        return view('pages.authors', [
-            'datas' => Author::get()
+        return view('pages.admin.authors', [
+            'datas' => Author::orderBy('name', 'ASC')->paginate(10)
         ]);
     }
 }
