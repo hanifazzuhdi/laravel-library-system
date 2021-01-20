@@ -2,9 +2,23 @@
 
 @section('content')
 
-<div class="container mt-5 pb-5">
+<div class="container my-5">
 
-    <h2 class="mb-4 pb-3 border-bottom">Daftar Buku</h2>
+    <div class="d-flex justify-content-between border-bottom mb-4 pb-3">
+        <h2 class="text-header">Daftar Buku</h2>
+
+        <div class="search-filter">
+
+            <form class="form-inline my-2 my-lg-0 d-inline" action="{{route('user.cari')}}" method="POST">
+                <input class="form-control mr-sm-2" type="text" placeholder="cari judul, penulis, isbn ..."
+                    name="keyword">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search"
+                        aria-hidden="true"></i></button>
+                @csrf
+            </form>
+
+        </div>
+    </div>
 
     <div class="d-flex justify-content-between flex-wrap">
         @foreach ($datas as $data)
@@ -20,10 +34,10 @@
                 </div>
                 <p class="card-text">{{ Str::substr($data->short_description, 0, 100)}} ...</p>
             </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                <a href="#" class="btn btn-success btn-sm btn-pinjam" data-target="#modalPinjam" data-toggle="modal"
-                    data-id="{{$data->id}}">Pinjam</a>
+            <div class="card-footer d-flex justify-content-end">
+                <a href="#" class="btn btn-outline-primary btn-sm mr-2">Detail</a>
+                <a href="#" class="btn btn-outline-success btn-sm btn-pinjam" data-target="#modalPinjam"
+                    data-toggle="modal" data-id="{{$data->id}}">Pinjam</a>
             </div>
         </div>
         @endforeach
@@ -89,7 +103,6 @@
 <script>
     $(function () {
         $('.btn-pinjam').on('click', function (){
-
             const id = $(this).data('id');
             console.log(id);
 
@@ -105,7 +118,6 @@
                     $('input[name=isbn]').val(data.isbn);
                 }
             });
-
         });
     });
 </script>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light py-3">
     <div class="container">
-        <a class="navbar-brand" href="{{route('user.home')}}"> PERPUS </a>
+        <a class="navbar-brand" href="{{route('user.home')}}"> <i class="fa fa-book" aria-hidden="true"></i> PERPUS </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,14 +10,14 @@
                 <li class="nav-item{{ request()->path() == 'home' ? ' active' : '' }}">
                     <a class="nav-link" href="{{route('user.home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item{{ request()->path() == 'penulis' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('user.penulis') }}">Penulis</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Peminjaman</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Pinjam Buku</a>
+                        <a class="dropdown-item" href="{{route('user.historyPinjaman')}}">Daftar Pinjaman</a>
                         <a class="dropdown-item" href="#">Kembalikan Buku</a>
                         <a class="dropdown-item" href="#">History Pinjaman</a>
                     </div>

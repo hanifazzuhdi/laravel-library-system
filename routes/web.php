@@ -25,8 +25,10 @@ Auth::routes([
 
 // Route
 Route::get('home', 'HomeController@index')->middleware('verified')->name('user.home');
+Route::post('user/cari', 'HomeController@cari')->name('user.cari');
 
 Route::get('book/show/{book}', 'PeminjamanController@show');
+Route::get('user/pinjaman', 'PeminjamanController@historyPinjaman')->name('user.historyPinjaman');
 Route::post('user/pinjam/{book}', 'PeminjamanController@pinjam')->name('user.pinjam');
 
 Route::get('penulis', 'PenulisController@index')->name('user.penulis');

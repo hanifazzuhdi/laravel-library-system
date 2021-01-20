@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Peminjaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,5 +36,12 @@ class PeminjamanController extends Controller
 
         alert()->success('Success', 'Peminjaman Sukses');
         return back();
+    }
+
+    public function historyPinjaman()
+    {
+        $datas = Peminjaman::with('book')->where('user_id', Auth::id())->get();
+
+        return view('pages.user.pinjaman', compact('datas'));
     }
 }

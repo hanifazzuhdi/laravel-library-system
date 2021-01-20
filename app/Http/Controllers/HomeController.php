@@ -28,4 +28,15 @@ class HomeController extends Controller
 
         return view('pages.user.home', compact('datas'));
     }
+
+    public function cari(Book $book)
+    {
+        $data = request()->validate([
+            'keyword' => 'required'
+        ]);
+
+        $datas = Book::where('title', 'LIKE', "%$data[keyword]%")->orWhere('isbn', 'LIKE', "%$data[keyword]%")->simplePaginate(9);
+
+        return view('pages.user.home', compact('datas'));
+    }
 }
