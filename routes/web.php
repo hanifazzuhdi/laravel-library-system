@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
+Auth::loginUsingId(2);
+
 // Autentikasi
 Auth::routes([
     'verify' => true
 ]);
 
 // Route
-Route::get('home', 'HomeController@index')->middleware('verified')->name('home');
+Route::get('home', 'HomeController@index')->middleware('verified')->name('user.home');
+
+Route::get('book/show/{book}', 'PeminjamanController@show');
+Route::post('user/pinjam/{book}', 'PeminjamanController@pinjam')->name('user.pinjam');
+
+Route::get('penulis', 'PenulisController@index')->name('user.penulis');

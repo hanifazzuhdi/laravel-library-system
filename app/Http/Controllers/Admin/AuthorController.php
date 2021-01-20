@@ -23,8 +23,8 @@ class AuthorController extends Controller
 
         Author::create($data);
 
-        return back()
-            ->with('success', 'data berhasil ditambahkan');
+        alert()->success('Success', 'Data berhasil ditambahkan');
+        return back();
     }
 
     public function show(Author $author)
@@ -40,15 +40,15 @@ class AuthorController extends Controller
 
         $author->update($data);
 
-        return back()
-            ->with('success', 'data berhasil diubah');
+        alert()->success('success', 'Data berhasil diubah');
+        return back();
     }
 
     public function destroy(Author $author)
     {
         $author->delete();
 
-        return back()
-            ->with('success', 'data berhasil dihapus');
+        alert()->success('success', 'Data berhasil dihapus');
+        return back();
     }
 }

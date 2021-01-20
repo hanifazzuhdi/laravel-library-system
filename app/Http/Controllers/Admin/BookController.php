@@ -37,8 +37,8 @@ class BookController extends Controller
 
         Book::create($data);
 
-        return back()
-            ->with('success', 'Buku Berhasil ditambahkan');
+        alert()->success('Success', 'data berhasil ditambahkan');
+        return back();
     }
 
     public function destroy(Book $book)

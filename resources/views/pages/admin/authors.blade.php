@@ -2,15 +2,6 @@
 
 @section('content')
 
-@if (session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success</strong> {{session('success')}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
-
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between">
         <h4 class="m-0 font-weight-bold text-primary">Daftar Penulis</h4>
