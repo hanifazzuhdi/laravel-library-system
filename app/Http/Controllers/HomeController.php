@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Peminjaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,9 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $datas = Book::simplePaginate(9);
+        $datas = Book::with('author')->simplePaginate(9);
 
-        return view('pages.user.home', compact('datas'));
+        $pinjaman = Peminjaman::with('book')->where('user_id', Auth::id())->where('is_returned', 0)->get();
+
+        return view('pages.user.home', compact('datas', 'pinjaman'));
     }
 
     public function cari(Book $book)

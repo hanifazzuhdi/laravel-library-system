@@ -4,6 +4,21 @@
 
 <div class="container my-5">
 
+    @if ($pinjaman != '[]')
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h6 class="border-bottom py-2">INFORMASI : </h6>
+        @foreach ($pinjaman as $item)
+        <p>Batas Pengembalian Buku <strong>{{$item->book->title}}</strong>
+            {{now()->diffInDays($item->returned_at)}}
+            hari lagi. Jangan lupa kembalikan !</p>
+        @endforeach
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
+
     <div class="d-flex justify-content-between border-bottom mb-4 pb-3">
         <h2 class="text-header">Daftar Buku</h2>
 
@@ -21,7 +36,7 @@
     </div>
 
     <div class="d-flex justify-content-between flex-wrap">
-        @foreach ($datas as $data)
+        @forelse ($datas as $data)
         <div class="card mb-4" style="width: 18rem;">
             <img class="card-img-top" src="{{$data->cover}}" height="200px" alt="Card image cap">
             <div class="card-body">
@@ -40,7 +55,11 @@
                     data-toggle="modal" data-id="{{$data->id}}">Pinjam</a>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="alert alert-secondary my-5" role="alert">
+            Buku Tidak ditemukan
+        </div>
+        @endforelse
     </div>
     <div class="d-flex justify-content-end mt-3">
         {{$datas->links()}}
@@ -79,7 +98,7 @@
                     <div class="form-group">
                         <label for="">Tanggal Kembalikan : </label>
                         <input type="date" class="form-control" name="returned_at" min="{{date('Y-m-d')}}"
-                            max="{{date('Y-m-d', time() + 60 * 60 * 24 * 7)}}">
+                            max="{{date('Y-m-d', time() + 60 * 60 * 24 * 7)}}" value="{{date('Y-m-d')}}">
                     </div>
                     <div class="form-group d-flex justify-content-end mt-4">
                         <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>

@@ -7,7 +7,7 @@
     <h2 class="mb-4 pb-3 border-bottom">Daftar Buku Pinjaman</h2>
 
     <div class="d-flex justify-content-between flex-wrap">
-        @foreach ($datas as $data)
+        @forelse ($datas as $data)
         <div class="card mb-4" style="width: 18rem;">
             <img class="card-img-top" src="{{$data->book->cover}}" height="200px" alt="Card image cap">
             <div class="card-body">
@@ -22,11 +22,17 @@
                     {{$data->returned_at->translatedFormat('d, F Y')}} </small>
             </div>
             <div class="card-footer d-flex justify-content-end">
-                <a href="#" class="btn btn-outline-primary btn-sm btn-pinjam" data-target="#modalPinjam"
-                    data-toggle="modal" data-id="{{$data->id}}">Kembalikan</a>
+                <form action="{{route('user.kembalikan', [$data->book->id])}}" method="POST">
+                    <button class="btn btn-outline-primary btn-sm btn-pinjam">Kembalikan</button>
+                    @csrf
+                </form>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="alert alert-secondary my-5" role="alert">
+            Belum Pinjam Buku
+        </div>
+        @endforelse
     </div>
 
 

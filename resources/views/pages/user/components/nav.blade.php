@@ -18,8 +18,6 @@
                         aria-haspopup="true" aria-expanded="false">Peminjaman</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="{{route('user.historyPinjaman')}}">Daftar Pinjaman</a>
-                        <a class="dropdown-item" href="#">Kembalikan Buku</a>
-                        <a class="dropdown-item" href="#">History Pinjaman</a>
                     </div>
                 </li>
             </ul>

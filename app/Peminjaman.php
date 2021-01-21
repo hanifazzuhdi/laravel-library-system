@@ -10,7 +10,7 @@ class Peminjaman extends Model
 
     public $dates = ['returned_at'];
 
-    protected $guarded = ['id'];
+    protected $fillable = ['user_id', 'book_id', 'is_returned', 'returned_at'];
 
     public function book()
     {
