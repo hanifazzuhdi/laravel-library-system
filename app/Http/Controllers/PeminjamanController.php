@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Events\UserPinjam;
+use App\Notifications\KembalikanBuku;
 use App\Peminjaman;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
+    // For Ajax
     public function show(Book $book)
     {
         json_decode($book);
@@ -23,7 +26,7 @@ class PeminjamanController extends Controller
             'returned_at' => 'required',
         ]);
 
-        $data = Peminjaman::where('book_id', $book->id)->where('is_returned', 0)->get()->count();
+        $data = Peminjaman::belumKembali()->where('book_id', $book->id)->get()->count();
 
         if ($data >= 1) {
             alert()->info('Gagal!', 'Anda memiliki daftar pinjaman dengan judul buku yang sama');
@@ -40,6 +43,8 @@ class PeminjamanController extends Controller
             'jumlah' => $book->jumlah -= 1
         ]);
 
+        event(new UserPinjam($book));
+
         alert()->success('Success', 'Peminjaman Sukses');
         return back();
     }
@@ -55,6 +60,9 @@ class PeminjamanController extends Controller
         $book->update([
             'jumlah' => $book->jumlah += 1,
         ]);
+
+        $user = Auth::user();
+        $user->notify(new KembalikanBuku());
 
         alert()->success('Success', 'Pengembalian Berhasil');
         return back();

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Auth::loginUsingId(2);
+// Auth::loginUsingId(2);
 
 // Autentikasi
 Auth::routes([
@@ -24,7 +24,7 @@ Auth::routes([
 ]);
 
 // Route
-Route::get('home', 'HomeController@index')->middleware('verified')->name('user.home');
+Route::get('/home', 'HomeController@index')->middleware('verified')->name('user.home');
 Route::post('user/cari', 'HomeController@cari')->name('user.cari');
 
 Route::get('user/pinjaman', 'PeminjamanController@historyPinjaman')->name('user.historyPinjaman');

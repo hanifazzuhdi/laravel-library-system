@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         $datas = Book::with('author')->simplePaginate(9);
 
-        $pinjaman = Peminjaman::with('book')->where('user_id', Auth::id())->where('is_returned', 0)->get();
+        $pinjaman = Peminjaman::with('book')->userPinjam()->get();
 
         return view('pages.user.home', compact('datas', 'pinjaman'));
     }
